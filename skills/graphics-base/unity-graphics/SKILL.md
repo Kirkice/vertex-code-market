@@ -44,6 +44,12 @@ modeSlugs:
 
 ## 工作流程
 
+### 跨版本 URP 前置检查
+
+当任务涉及 URP 时，不要把 URP 17 或当前已知项目版本当作默认版本。先读取并交叉验证项目中的 `ProjectVersion.txt`、`Packages/manifest.json`、`packages-lock.json`、URP `package.json`、Renderer Data 和现有 Feature/Pass 代码。版本未知或证据冲突时，先输出检测结果和置信度，再选择 API。
+
+遵循 `knowledge/graphics/urp-cross-version.md`、`knowledge/graphics/urp-version-adaptation.md` 和 `knowledge/graphics/urp-project-detection.md` 的三层模型：跨版本原则、版本适配、项目事实校验。
+
 ### Step 1: 识别 Unity 渲染栈
 
 先确认项目属于哪一类：
@@ -56,6 +62,12 @@ modeSlugs:
   - 查 `HDRenderPipelineAsset`, `Custom Pass`, `Fullscreen Custom Pass`, Volume 覆盖项
 
 如果仓库里已经能看出来，就不要先问用户。
+
+对于 URP，额外记录：Unity/URP 版本、Universal/2D/Deferred Renderer、是否存在 `RecordRenderGraph`、当前项目实际使用的 Renderer Asset，以及目标平台。没有这些证据时，不生成绑定特定版本的完整代码。
+
+针对 Unity 2022.3 / URP 14.x，额外区分 Execute-first 与 RenderGraph 过渡路径：检查 `ScriptableRenderPass.Execute`、`RecordRenderGraph` 的实现数量、RenderGraph 命名空间、`ref RenderingData` 签名，以及项目中 RTHandle/TemporaryRT 的资源模式。URP 14 不应直接套用 URP 17 的 `ContextContainer` 模板；具体项目功能、算法和资源命名不应写入通用知识库。
+
+针对 Unity 2021.2 / URP 12.x，先确认项目是否存在 RenderGraph 的自定义扩展；若包源码和项目源码均没有 `RecordRenderGraph`，默认只生成传统 `Execute` Pass，并检查 CommandBuffer、临时 RT、清理回调和相机栈生命周期。
 
 ### Step 2: 识别任务落点
 
@@ -124,3 +136,5 @@ modeSlugs:
 - **SRP Batcher 未命中**: 常见于 CBUFFER 布局不规范、材质属性与常量布局不一致
 - **Shader Variant 爆炸**: 常见于 `multi_compile` 滥用、平台和功能开关组合过多
 - **Built-in / URP / HDRP 经验混用**: 同样的做法在不同管线下入口完全不同，先分清管线再动手
+- **版本 API 误用**: 版本号相近不代表资源接口、RenderGraph 路径或 Pass 生命周期相同；以项目源码和当前包源码为准
+- **URP 14 过渡路径误判**: 包内存在 RenderGraph 不代表项目自定义 Feature 已经走 RenderGraph；先检查实际 Pass 方法和 Renderer 调用链

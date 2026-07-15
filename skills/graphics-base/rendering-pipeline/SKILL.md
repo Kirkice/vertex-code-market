@@ -21,6 +21,14 @@ modeSlugs:
 
 ## 工作流程
 
+### URP 跨版本工作流
+
+URP 任务必须采用“通用原则 + 版本适配 + 项目事实校验”三层模型。先确认项目实际 Unity/URP 版本和 Renderer，再判断使用传统 `Execute` 还是 `RecordRenderGraph`；不能因为知识库来自 URP 17 就默认使用 RenderGraph。
+
+检查顺序：`ProjectSettings/ProjectVersion.txt` → `Packages/manifest.json` / `packages-lock.json` → URP `package.json` → Renderer Data → 现有 `ScriptableRenderPass`、`Execute`、`RecordRenderGraph` 和 `EnqueuePass`。版本或调用路径无法确认时，优先复制项目已有模式，并将未确认项列为假设。
+
+生成方案时必须标注版本范围、API 路径、资源生命周期模型、平台限制、兼容性风险和降级实现。详见 `knowledge/graphics/urp-cross-version.md`、`knowledge/graphics/urp-version-adaptation.md` 和 `knowledge/graphics/urp-project-detection.md`。
+
 ### Step 1: 理解现有管线
 
 在修改管线之前，必须先理解用户的现有架构：
@@ -49,6 +57,12 @@ modeSlugs:
 4. **屏障规划**: 前一个 Pass 写入的资源需要什么同步与状态转换？按目标 API 明确资源状态、访问掩码和执行依赖
 5. **Shader 编写**: 为新 Pass 编写对应的 Shader
 6. **CPU 端集成**: Command list 录制、资源绑定、常量更新
+
+对于 URP，先补充：确认 Renderer Feature 是否挂载、确认输入资源是否实际可用、确认目标版本的 Pass API 签名，再选择传统临时 RT/RTHandle 或 RenderGraph TextureHandle。不要把旧式 CommandBuffer 代码直接改名为 RenderGraph 代码。
+
+在 Unity 2022.3 / URP 14.x 中，默认按 Execute-first 设计：自定义 Pass 需要实现 `Execute`，RenderGraph 过渡实现使用 `UnityEngine.Experimental.Rendering.RenderGraphModule` 和 `ref RenderingData`。只有项目证据确认 RenderGraph 路径和资源声明方式后，才生成对应的 `RecordRenderGraph` 实现。具体项目的效果名称、算法细节、资源命名和业务代码不得沉淀到通用 Skill。
+
+在 Unity 2021.2 / URP 12.x 中，默认采用传统 Execute 路径：先搜索 `RecordRenderGraph` 和 RenderGraph 模块，若没有项目级扩展证据，就不要生成 RenderGraph API。重点设计 CommandBuffer、临时 RT、目标句柄、`OnCameraCleanup` 和相机栈清理。
 
 #### 常见管线修改场景
 
@@ -157,3 +171,5 @@ Frame Start
 - **视口/裁剪矩形**: 新 Pass 是否设置了正确的 viewport 和 scissor rect
 - **渲染目标格式**: 确保 PSO 的 RTV format 与实际 RT 格式匹配
 - **深度缓冲状态**: 从 depth-write 切换到 depth-read 需要 transition barrier
+- **URP 版本漂移**: `Execute`、`RecordRenderGraph`、资源句柄和中间纹理策略随版本变化；没有项目证据时不得把某一版本的模板当作通用模板
+- **URP 14 混合执行模型**: 不要把内置 RenderGraph 支持等同于自定义 Pass 已迁移；先确认 `Execute`/`RecordRenderGraph`、调用路径和资源所有权
