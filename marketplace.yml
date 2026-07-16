@@ -1,0 +1,9 @@
+name: vertex-code-market
+description: Vertex graphics, Unity tooling, and RenderDoc skills.
+skills:
+  - name: unity-cli
+    sourcePath: skills/unity-tooling/unity-cli
+    description: Unity Editor and project operations, including build, test, logs, and environment diagnostics.
+  - name: unity-package-management
+    sourcePath: skills/unity-tooling/unity-package-management
+    description: Unity Package Manager discovery, version inspection, dependency analysis, and package changes.

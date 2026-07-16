@@ -2,6 +2,8 @@
 
 This group contains Unity project-operation skills. It is intentionally separate from `skills/graphics-base/`:
 
+Both child directories are first-class marketplace skills. Their marketplace source paths are `skills/unity-tooling/unity-cli` and `skills/unity-tooling/unity-package-management`; `third-party/unity-technologies-skills/` only stores attribution and upstream licensing records.
+
 - `unity-cli`: Editor, project, build, test, log, and environment operations.
 - `unity-package-management`: UPM package discovery and package changes through Unity's Package Manager API.
 

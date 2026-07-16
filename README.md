@@ -65,5 +65,5 @@ unity-tooling/
 - Each skill lives in its own folder and includes a `SKILL.md`.
 - Extra references stay beside the skill under `references/`.
 - Some skills also include agent-specific metadata under `agents/`.
-- This repo is ready to be referenced by marketplace `skills.yml` entries using `sourcePath` values like `graphics/write-shader` or `renderdoc-for-vscode/renderdoc-frame-overview`.
+- This repo is ready to be referenced by marketplace [`marketplace.yml`](marketplace.yml) entries using `sourcePath` values like `graphics-base/write-shader`, `renderdoc-for-vscode/renderdoc-frame-overview`, or `unity-tooling/unity-cli`.
 - Unity tooling skills are adapted from Unity Technologies' `skills` repository. See `third-party/unity-technologies-skills/NOTICE.md` and `UPSTREAM.md` for attribution, licensing, and source provenance.
