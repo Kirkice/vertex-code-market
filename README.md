@@ -23,6 +23,13 @@ renderdoc-for-vscode/
     SKILL.md
     agents/
       openai.yaml
+unity-tooling/
+  unity-cli/
+    SKILL.md
+    references/
+  unity-package-management/
+    SKILL.md
+    references/
   renderdoc-current-selection-explainer/
     SKILL.md
     agents/
@@ -59,3 +66,4 @@ renderdoc-for-vscode/
 - Extra references stay beside the skill under `references/`.
 - Some skills also include agent-specific metadata under `agents/`.
 - This repo is ready to be referenced by marketplace `skills.yml` entries using `sourcePath` values like `graphics/write-shader` or `renderdoc-for-vscode/renderdoc-frame-overview`.
+- Unity tooling skills are adapted from Unity Technologies' `skills` repository. See `third-party/unity-technologies-skills/NOTICE.md` and `UPSTREAM.md` for attribution, licensing, and source provenance.
