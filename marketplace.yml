@@ -4,6 +4,137 @@ skills:
   - name: unity-cli
     sourcePath: skills/unity-tooling/unity-cli
     description: Unity Editor and project operations, including build, test, logs, and environment diagnostics.
+    group:
+      id: unity-tooling
+      name: Unity Tooling
+      description: Unity Editor, project, package, build, and diagnostics skills.
+      order: 20
   - name: unity-package-management
     sourcePath: skills/unity-tooling/unity-package-management
     description: Unity Package Manager discovery, version inspection, dependency analysis, and package changes.
+    group:
+      id: unity-tooling
+      name: Unity Tooling
+      description: Unity Editor, project, package, build, and diagnostics skills.
+      order: 20
+knowledge:
+  - name: mode-handoff-validation-pattern
+    sourcePath: knowledge/general
+    description: Architect and Code mode handoff validation pattern.
+    group:
+      id: general-knowledge
+      name: General Knowledge
+      description: Cross-domain knowledge documents and workflow methodology.
+      order: 30
+    files:
+      - path: mode-handoff-validation-pattern.md
+  - name: mobile-performance-analysis
+    sourcePath: knowledge/graphics
+    description: Mobile graphics performance analysis methodology.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: mobile-performance-analysis.md
+  - name: shadow-dpcf-pcss-stability
+    sourcePath: knowledge/graphics
+    description: DPCF and PCSS shadow stability case study.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: shadow-dpcf-pcss-stability.md
+  - name: urp-cross-version
+    sourcePath: knowledge/graphics
+    description: Cross-version URP graphics engineering methodology.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: urp-cross-version.md
+  - name: urp-project-detection
+    sourcePath: knowledge/graphics
+    description: URP project detection and safe fallback rules.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: urp-project-detection.md
+  - name: urp-version-adaptation
+    sourcePath: knowledge/graphics
+    description: URP version adaptation matrix.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: urp-version-adaptation.md
+  - name: urp12-scriptable-render-pass-reference
+    sourcePath: knowledge/graphics
+    description: URP 12 ScriptableRenderPass reference.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: urp12-scriptable-render-pass-reference.md
+  - name: urp15-rendergraph-transition
+    sourcePath: knowledge/graphics
+    description: URP 15 RenderGraph transition reference.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: urp15-rendergraph-transition.md
+  - name: thegibook-foundations
+    sourcePath: knowledge/graphics
+    description: Navigation index for thegibook foundational knowledge (Ch1-3).
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: thegibook-foundations.md
+  - name: thegibook-light-surface
+    sourcePath: knowledge/graphics
+    description: Light-surface interaction, radiometry, rendering equation, BRDF, and GI algorithm selection.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: thegibook-light-surface.md
+  - name: thegibook-parallel-architecture
+    sourcePath: knowledge/graphics
+    description: CPU/GPU architecture, SIMD/SIMT, memory hierarchy, and performance bottleneck analysis.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: thegibook-parallel-architecture.md
+  - name: thegibook-shading-pipeline
+    sourcePath: knowledge/graphics
+    description: Rendering pipeline, Forward/Deferred shading, G-buffer, Tiled/Clustered shading, and anti-aliasing.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: thegibook-shading-pipeline.md
