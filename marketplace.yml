@@ -1,6 +1,14 @@
 name: vertex-code-market
 description: Vertex graphics, Unity tooling, and RenderDoc skills.
 skills:
+  - name: shader-to-desmos
+    sourcePath: skills/graphics-base/shader-to-desmos
+    description: Convert shader math into valid Desmos expressions and interactive plots instead of passing raw shader source.
+    group:
+      id: graphics-base
+      name: Graphics Base
+      description: Core graphics rendering and shader engineering skills.
+      order: 10
   - name: unity-cli
     sourcePath: skills/unity-tooling/unity-cli
     description: Unity Editor and project operations, including build, test, logs, and environment diagnostics.
