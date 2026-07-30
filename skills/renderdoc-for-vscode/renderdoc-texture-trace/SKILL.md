@@ -5,7 +5,7 @@ description: Trace how a texture is produced, consumed, and related to passes in
 
 # RenderDoc Texture Trace
 
-Follow a texture through the frame as a resource, not just as a screenshot.
+Follow a texture through the frame as a resource, not just as a screenshot. Follow the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md) for state and evidence handling.
 
 ## Workflow
 

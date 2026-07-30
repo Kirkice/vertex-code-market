@@ -5,6 +5,8 @@ description: Launch a Windows executable or Android application through RenderDo
 
 # RenderDoc Application Launch and Capture
 
+Use the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md) after launch when handing the live session to capture-analysis skills.
+
 Use this workflow for live application control. Do not guess the platform when the user only gives an application name.
 
 ## Platform routing

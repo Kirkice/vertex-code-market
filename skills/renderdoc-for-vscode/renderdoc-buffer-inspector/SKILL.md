@@ -5,7 +5,7 @@ description: Inspect buffer resources and their contents in a RenderDoc capture,
 
 # RenderDoc Buffer Inspector
 
-Inspect buffers carefully and incrementally so the answer stays grounded and readable.
+Inspect buffers carefully and incrementally so the answer stays grounded and readable. Follow the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md).
 
 ## Workflow
 

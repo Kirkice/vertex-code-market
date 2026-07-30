@@ -5,7 +5,7 @@ description: Recover from missing RenderDoc capture or replay state before attem
 
 # RenderDoc Replay Recovery Helper
 
-Recover analysis state safely and explicitly instead of guessing through missing replay data.
+Recover analysis state safely and explicitly instead of guessing through missing replay data. This is the recovery branch of the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md).
 
 ## Workflow
 

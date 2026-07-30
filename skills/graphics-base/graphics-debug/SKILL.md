@@ -13,6 +13,8 @@ modeSlugs:
 
 ## Skill 切换
 
+遵循共享 [`../../../knowledge/graphics/graphics-skill-routing-protocol.md`](../../../knowledge/graphics/graphics-skill-routing-protocol.md)，并使用统一的 Confirmed / Inferred / Blocked / Validated 输出分类。
+
 - 如果主要任务是写新 shader、重写现有 shader 或修复 shader 编译错误，切换到 `write-shader`
 - 如果问题来自新 pass、资源生命周期、render graph 或管线集成，切换到 `rendering-pipeline`
 - 如果主要诉求是“太慢了”“掉帧了”“GPU/CPU 时间太高”，切换到 `graphics-optimization`

@@ -5,7 +5,7 @@ description: Explain the currently selected RenderDoc draw, event, or resource i
 
 # RenderDoc Current Selection Explainer
 
-Translate the current RenderDoc selection into a short, grounded explanation without making the user specify raw IDs.
+Translate the current RenderDoc selection into a short, grounded explanation without making the user specify raw IDs. Follow the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md).
 
 ## Workflow
 

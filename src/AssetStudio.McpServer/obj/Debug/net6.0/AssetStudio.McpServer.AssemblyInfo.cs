@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AssetStudio.McpServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.0+7d526ec235ea5637496aae8fadf36825e206e295")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.0+51026d5823e31d7e748ea610c84bfa419284cd03")]
 [assembly: System.Reflection.AssemblyProductAttribute("AssetStudio.McpServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AssetStudio.McpServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.1.0.0")]

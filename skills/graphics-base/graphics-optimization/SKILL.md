@@ -13,6 +13,8 @@ modeSlugs:
 
 ## Skill 切换
 
+遵循共享 [`../../../knowledge/graphics/graphics-skill-routing-protocol.md`](../../../knowledge/graphics/graphics-skill-routing-protocol.md)，先建立性能证据，再按统一交付协议区分 Confirmed、Inferred、Blocked 和 Validated。
+
 - 如果主要问题是黑屏、闪烁、颜色错误、阴影错误或几何体消失，切换到 `graphics-debug`
 - 如果优化方案需要重构 render graph、拆分 pass、修改资源生命周期或改变管线拓扑，切换到 `rendering-pipeline`
 - 如果瓶颈集中在单个 shader 的实现细节、采样路径或数学热点，切换到 `write-shader`

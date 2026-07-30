@@ -21,13 +21,7 @@ modeSlugs:
 
 ## 工作流程
 
-### URP 跨版本工作流
-
-URP 任务必须采用“通用原则 + 版本适配 + 项目事实校验”三层模型。先确认项目实际 Unity/URP 版本和 Renderer，再判断使用传统 `Execute` 还是 `RecordRenderGraph`；不能因为知识库来自 URP 17 就默认使用 RenderGraph。
-
-检查顺序：`ProjectSettings/ProjectVersion.txt` → `Packages/manifest.json` / `packages-lock.json` → URP `package.json` → Renderer Data → 现有 `ScriptableRenderPass`、`Execute`、`RecordRenderGraph` 和 `EnqueuePass`。版本或调用路径无法确认时，优先复制项目已有模式，并将未确认项列为假设。
-
-生成方案时必须标注版本范围、API 路径、资源生命周期模型、平台限制、兼容性风险和降级实现。详见 `knowledge/graphics/urp-cross-version.md`、`knowledge/graphics/urp-version-adaptation.md` 和 `knowledge/graphics/urp-project-detection.md`。
+遵循共享 [`../../../knowledge/graphics/graphics-skill-routing-protocol.md`](../../../knowledge/graphics/graphics-skill-routing-protocol.md)。URP 任务统一遵循 [`../../../knowledge/graphics/urp-detection-version-routing.md`](../../../knowledge/graphics/urp-detection-version-routing.md)，本 Skill 只补充管线架构和资源生命周期设计。
 
 ### Step 1: 理解现有管线
 

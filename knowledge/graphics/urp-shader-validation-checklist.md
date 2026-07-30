@@ -29,8 +29,9 @@
 
 ## 2. 事实与范围门禁
 
-- [ ] 已完成 Shader 事实卡，目标 Shader、SubShader、Pass 和材质模型明确。
-- [ ] 已确认实际 Renderer、Rendering Mode、注入阶段与目标平台。
+URP 版本、渲染栈、Renderer、Pass 路径和资源模式由共享 [`urp-detection-version-routing.md`](urp-detection-version-routing.md) 统一检测；本清单不重复维护版本路由规则，只验收 Shader 与其管线协议是否匹配。
+
+- [ ] 已引用共享 URP 检查卡，并明确目标 Shader、SubShader、Pass 和材质模型。
 - [ ] 已从目标项目锁定包源码确认入口 Include、宏、结构体和函数签名。
 - [ ] 已找到最邻近的可工作 Shader 或内置 Pass 作为项目证据。
 - [ ] 已列出 C# 设置端、Renderer 资源生产端和 Shader 消费端。
@@ -38,7 +39,7 @@
 - [ ] 未把其他项目或其他包代际的实现当作当前项目事实。
 - [ ] 所有未知关键协议已标记 BLOCKED，未用猜测补全代码。
 
-证据至少包含目标文件路径、关键符号及其调用或 Include 关系。
+证据至少包含目标文件路径、关键符号及其调用或 Include 关系；版本和 Renderer 证据应回链到共享 URP 检查卡。
 
 ---
 

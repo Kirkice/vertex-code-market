@@ -36,6 +36,26 @@ knowledge:
       order: 30
     files:
       - path: mode-handoff-validation-pattern.md
+  - name: graphics-skill-routing-protocol
+    sourcePath: knowledge/graphics
+    description: Shared Graphics Skill routing, ownership boundaries, and delivery status protocol.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: graphics-skill-routing-protocol.md
+  - name: urp-detection-version-routing
+    sourcePath: knowledge/graphics
+    description: Shared URP project-fact detection and Execute/RenderGraph version routing protocol.
+    group:
+      id: graphics-knowledge
+      name: Graphics Knowledge
+      description: Graphics rendering, performance, and URP knowledge.
+      order: 10
+    files:
+      - path: urp-detection-version-routing.md
   - name: mobile-performance-analysis
     sourcePath: knowledge/graphics
     description: Mobile graphics performance analysis methodology.

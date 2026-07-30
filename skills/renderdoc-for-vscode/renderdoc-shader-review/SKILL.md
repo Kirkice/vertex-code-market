@@ -5,7 +5,7 @@ description: Review shader behavior for a RenderDoc event, including stage roles
 
 # RenderDoc Shader Review
 
-Review shader behavior in context, not as isolated source text.
+Review shader behavior in context, not as isolated source text. Follow the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md).
 
 ## Workflow
 

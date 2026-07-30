@@ -5,7 +5,7 @@ description: Summarize the structure of a RenderDoc capture and identify its top
 
 # RenderDoc Frame Overview
 
-Build a reliable first-pass map of the current RenderDoc capture before drilling into individual events.
+Build a reliable first-pass map of the current RenderDoc capture before drilling into individual events. Follow the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md) for capture state, evidence classification, and output conventions.
 
 ## Workflow
 
@@ -36,6 +36,8 @@ Then report:
 - The next 1-3 best follow-up questions or tool paths.
 
 ## Guardrails
+
+Use the shared protocol's Confirmed / Inferred / Blocked / Next step categories in the report.
 
 - Do not jump straight into shader source, pipeline state, or buffer dumps unless the user explicitly asks.
 - Do not invent pass names, timings, or marker hierarchy.

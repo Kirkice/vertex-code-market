@@ -750,5 +750,98 @@
                              ],
         "tokenBudget":  2200,
         "alwaysInclude":  false
+    },
+    {
+        "id":  "graphics-skill-routing-protocol",
+        "title":  "Graphics Skill 路由协议",
+        "path":  "graphics/graphics-skill-routing-protocol.md",
+        "summary":  "统一 Graphics Base Skill 的任务分类、主执行 Skill、二次转交边界和 Confirmed/Inferred/Validated 交付协议。",
+        "kind":  "methodology",
+        "domain":  "graphics",
+        "tags":  [
+                     "graphics-routing",
+                     "skill-routing",
+                     "shader",
+                     "rendering-pipeline",
+                     "debugging",
+                     "optimization"
+                 ],
+        "triggers":  [
+                         "Graphics Skill 路由",
+                         "Shader 路由",
+                         "渲染问题分类",
+                         "graphics debugging",
+                         "graphics optimization"
+                     ],
+        "scenarios":  [
+                          "graphics-routing",
+                          "shader-authoring",
+                          "rendering-debugging",
+                          "graphics-optimization"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  103,
+        "relatedSkills":  [
+                              "unity-graphics",
+                              "write-shader",
+                              "rendering-pipeline",
+                              "graphics-debug",
+                              "graphics-optimization"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  1400,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp-detection-version-routing",
+        "title":  "URP 检测与版本路由协议",
+        "path":  "graphics/urp-detection-version-routing.md",
+        "summary":  "统一 Unity 渲染栈、URP 版本、Renderer、Execute/RenderGraph 路径和资源模式的事实检测与 API 路由。",
+        "kind":  "methodology",
+        "domain":  "graphics",
+        "tags":  [
+                     "unity",
+                     "urp",
+                     "version-routing",
+                     "rendergraph",
+                     "scriptable-render-pass",
+                     "project-facts"
+                 ],
+        "triggers":  [
+                         "URP 版本检测",
+                         "URP API 路由",
+                         "Execute RenderGraph",
+                         "URP Renderer",
+                         "URP 跨版本"
+                     ],
+        "scenarios":  [
+                          "urp-detection",
+                          "pipeline-integration",
+                          "rendergraph-migration",
+                          "cross-version-urp"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  104,
+        "relatedSkills":  [
+                              "unity-graphics",
+                              "rendering-pipeline",
+                              "write-shader",
+                              "unity-package-management"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  1800,
+        "alwaysInclude":  false
     }
 ]

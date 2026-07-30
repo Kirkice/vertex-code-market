@@ -5,7 +5,7 @@ description: Map RenderDoc passes, events, and shaders back to likely project-si
 
 # RenderDoc Pass To Project Mapping
 
-Connect capture evidence to workspace code so the user can leave the frame and change the real implementation.
+Connect capture evidence to workspace code so the user can leave the frame and change the real implementation. Follow the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md) and keep capture facts separate from source candidates.
 
 ## Workflow
 

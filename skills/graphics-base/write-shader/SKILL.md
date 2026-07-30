@@ -13,7 +13,7 @@ modeSlugs:
 
 ## 工作流路由
 
-首先识别渲染栈，再选择且只选择一个主分支：
+先遵循共享 [`../../../knowledge/graphics/graphics-skill-routing-protocol.md`](../../../knowledge/graphics/graphics-skill-routing-protocol.md)。涉及 Unity/URP 时，使用 [`../../../knowledge/graphics/urp-detection-version-routing.md`](../../../knowledge/graphics/urp-detection-version-routing.md) 完成统一事实检测，再选择且只选择一个主分支：
 
 - **URP 分支**：存在 Unity URP 包、URP ShaderLab Tags/Pass、URP ShaderLibrary Include、Universal Renderer 资源，或任务明确要求 URP。执行本文“URP 专用工作流”，并渐进加载 URP 知识库。
 - **通用分支**：非 URP 的 HLSL、GLSL、WGSL、MSL、自研引擎、其他渲染管线或纯 Shader 数学任务。执行原有通用工作流。
@@ -40,11 +40,13 @@ URP 分支是 `write-shader` 的内部专用路径，不再切换到独立 URP S
 | Include 分层、数据流、Forward/Deferred 与资源边界 | [`../../../knowledge/graphics/urp-shader-library-architecture.md`](../../../knowledge/graphics/urp-shader-library-architecture.md) |
 | 代码结构、SRP Batcher、多 Pass、Variant、精度和性能 | [`../../../knowledge/graphics/urp-shader-engineering.md`](../../../knowledge/graphics/urp-shader-engineering.md) |
 | 实现、迁移、审查或完成判定 | [`../../../knowledge/graphics/urp-shader-validation-checklist.md`](../../../knowledge/graphics/urp-shader-validation-checklist.md) |
-| Renderer 调度、资源生产或管线侧定制 | [`../../../knowledge/graphics/urp-cross-version.md`](../../../knowledge/graphics/urp-cross-version.md)，并切换或协作 `rendering-pipeline` |
+| Renderer 调度、资源生产或管线侧定制 | [`../../../knowledge/graphics/urp-detection-version-routing.md`](../../../knowledge/graphics/urp-detection-version-routing.md)，并切换或协作 `rendering-pipeline`；版本差异细节按需读取 [`../../../knowledge/graphics/urp-cross-version.md`](../../../knowledge/graphics/urp-cross-version.md) |
 
 不要默认加载全部文档，也不要把某个目标项目的符号提升为通用事实。
 
 ### 2. 强制 Shader 事实卡
+
+URP 版本、Renderer、Pass 路径和资源模式沿用共享 URP 检查卡；本 Skill 只补充 Shader、Include、材质和 C#/HLSL 协议字段。
 
 生成绑定 URP 协议的代码前，必须确认并报告：
 

@@ -5,7 +5,7 @@ description: Investigate performance bottlenecks in a RenderDoc capture and expl
 
 # RenderDoc Performance Investigation
 
-Find the real hotspots first, then drill from timing evidence into geometry, shader, and texture pressure.
+Find the real hotspots first, then drill from timing evidence into geometry, shader, and texture pressure. Follow the shared [`../renderdoc-shared-analysis-protocol.md`](../renderdoc-shared-analysis-protocol.md), especially its rule that performance claims require timing evidence.
 
 ## Workflow
 
