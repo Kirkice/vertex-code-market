@@ -4,7 +4,7 @@ This directory contains material adapted from Unity Technologies' `skills` repos
 
 https://github.com/Unity-Technologies/skills
 
-The upstream material is licensed under the Unity Companion License for Unity-dependent projects. See [`LICENSE.md`](./LICENSE.md) and the official license page:
+The upstream material is licensed under the Unity Companion License for Unity-dependent projects. See [`UNITY-COMPANION-LICENSE.md`](./UNITY-COMPANION-LICENSE.md) and the official license page:
 
 https://unity3d.com/legal/licenses/unity_companion_license
 

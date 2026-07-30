@@ -205,8 +205,12 @@ Start with [`renderdoc-frame-overview/SKILL.md`](skills/renderdoc-for-vscode/ren
 
 This repository contains capability definitions, methodology, references, and marketplace metadata. It does not replace the Vertex-Code runtime, a Unity project, or RenderDoc itself. Runtime validation depends on the target project, Unity version, graphics API, platform, capture availability, and installed tools.
 
-Unity tooling content adapted from Unity Technologies material remains attributed under [`third-party/unity-technologies-skills/`](third-party/unity-technologies-skills/).
+Unity tooling skills adapted from Unity Technologies are kept under [`skills/unity-tooling/`](skills/unity-tooling/). Their attribution, license, and upstream records live beside the adapted skills:
+
+- [`NOTICE.md`](skills/unity-tooling/NOTICE.md) — third-party attribution and scope boundary.
+- [`UNITY-COMPANION-LICENSE.md`](skills/unity-tooling/UNITY-COMPANION-LICENSE.md) — applicable Unity Companion License notice.
+- [`UPSTREAM.md`](skills/unity-tooling/UPSTREAM.md) — source repository, commit, imported skills, and provenance record.
 
 ## License and attribution
 
-See the repository license and [`third-party/unity-technologies-skills/NOTICE.md`](third-party/unity-technologies-skills/NOTICE.md) for attribution, licensing, and upstream provenance.
+See the repository license and the Unity tooling attribution records under [`skills/unity-tooling/`](skills/unity-tooling/) before redistributing or modifying adapted Unity material.
