@@ -1,206 +1,754 @@
-[ 
-  {
-    "id": "urp12-scriptable-render-pass-reference",
-    "title": "URP 12.1.7 ScriptableRenderPass 参考",
-    "path": "graphics/urp12-scriptable-render-pass-reference.md",
-    "summary": "基于 URP 12.1.7 包源码的 Execute-first ScriptableRenderPass 参考，覆盖传统注入链路、资源清理和 RenderGraph 降级规则。",
-    "kind": "reference",
-    "domain": "graphics",
-    "tags": ["urp12", "unity-2021", "scriptable-render-pass", "execute", "command-buffer", "temporary-rt"],
-    "triggers": ["URP12", "URP 12.1.7", "Unity 2021.2", "ScriptableRenderPass", "传统 Pass", "OnCameraCleanup"],
-    "scenarios": ["unity-graphics", "pipeline-design", "version-migration"],
-    "modes": ["graphics"],
-    "priority": 95,
-    "relatedSkills": ["unity-graphics", "rendering-pipeline"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 1600,
-    "alwaysInclude": false
-  },
-  {
-    "id": "urp15-rendergraph-transition",
-    "title": "URP 15.0.6 RenderGraph 过渡参考",
-    "path": "graphics/urp15-rendergraph-transition.md",
-    "summary": "基于 URP 15.0.6 包源码的通用 RenderGraph 过渡参考，记录 Execute、FrameResources 和版本边界，不包含项目敏感内容。",
-    "kind": "reference",
-    "domain": "graphics",
-    "tags": ["urp15", "unity-2023", "rendergraph", "frameresources", "execute", "versioning"],
-    "triggers": ["URP15", "URP 15.0.6", "Unity 2023.1", "FrameResources", "RenderGraph 过渡"],
-    "scenarios": ["unity-graphics", "pipeline-design", "version-migration"],
-    "modes": ["graphics"],
-    "priority": 96,
-    "relatedSkills": ["unity-graphics", "rendering-pipeline"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 1600,
-    "alwaysInclude": false
-  },
-  {
-    "id": "urp-cross-version",
-    "title": "跨版本 URP 图形工程方法",
-    "path": "graphics/urp-cross-version.md",
-    "summary": "以通用原则、版本适配和项目事实校验三层模型处理不同 Unity/URP 版本，包含 API 选择、兼容性信息和安全策略。",
-    "kind": "methodology",
-    "domain": "graphics",
-    "tags": ["unity", "urp", "versioning", "rendergraph", "renderer-feature", "compatibility"],
-    "triggers": ["URP", "Unity", "版本", "跨版本", "RenderGraph", "RendererFeature", "ScriptableRenderPass", "兼容性"],
-    "scenarios": ["unity-graphics", "pipeline-design", "version-migration"],
-    "modes": ["graphics"],
-    "priority": 100,
-    "relatedSkills": ["unity-graphics", "rendering-pipeline"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 2200,
-    "alwaysInclude": false
-  },
-  {
-    "id": "urp-version-adaptation",
-    "title": "URP 版本适配矩阵",
-    "path": "graphics/urp-version-adaptation.md",
-    "summary": "对比 URP 7-10、12、14、15-16 和 17+ 的 API 使用策略，并提供 RenderGraph、资源和迁移风险判断规则。",
-    "kind": "reference",
-    "domain": "graphics",
-    "tags": ["urp", "version-matrix", "execute", "record-render-graph", "migration"],
-    "triggers": ["URP 版本", "URP12", "URP14", "URP17", "Execute", "RecordRenderGraph", "迁移"],
-    "scenarios": ["version-migration", "pipeline-design"],
-    "modes": ["graphics"],
-    "priority": 98,
-    "relatedSkills": ["unity-graphics", "rendering-pipeline"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 1800,
-    "alwaysInclude": false
-  },
-  {
-    "id": "urp-project-detection",
-    "title": "URP 项目检测与降级规则",
-    "path": "graphics/urp-project-detection.md",
-    "summary": "从 Unity 项目文件、包版本、Renderer Data 和现有 Pass 代码识别实际 URP 环境，并在证据不足时安全降级。",
-    "kind": "playbook",
-    "domain": "graphics",
-    "tags": ["unity", "urp", "detection", "diagnosis", "fallback", "renderer-data"],
-    "triggers": ["检测 URP", "项目版本", "Renderer Data", "Feature 不生效", "版本未知", "降级"],
-    "scenarios": ["unity-graphics", "pipeline-debug", "version-migration"],
-    "modes": ["graphics"],
-    "priority": 99,
-    "relatedSkills": ["unity-graphics", "rendering-pipeline", "graphics-debug"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 1800,
-    "alwaysInclude": false
-  },
-  {
-    "id": "shadow-dpcf-pcss-stability",
-    "title": "DPCF 与 PCSS 阴影稳定性案例",
-    "path": "graphics/shadow-dpcf-pcss-stability.md",
-    "summary": "DPCF 与 PCSS 软阴影稳定性分析，覆盖 blocker search 硬阈值跳变、adaptive bias 联动、sample 级分支平滑化等根因与修复思路。",
-    "kind": "case-study",
-    "domain": "graphics",
-    "tags": ["shadow", "dpcf", "pcss", "artifact", "soft-shadow", "blocker-search", "stability"],
-    "triggers": ["阴影", "shadow", "pcss", "dpcf", "softness", "漏光", "杂点", "跳变", "blocker", "半影", "penumbra", "shadow artifact", "shadow acne", "peter panning"],
-    "scenarios": ["artifact-analysis", "shadow-debug"],
-    "modes": ["graphics"],
-    "priority": 90,
-    "relatedSkills": ["graphics-debug"],
-    "relatedPlaybooks": ["shadow_issue"],
-    "tokenBudget": 1500,
-    "alwaysInclude": false
-  },
-  {
-    "id": "mobile-performance-analysis",
-    "title": "移动端图形性能分析方法论",
-    "path": "graphics/mobile-performance-analysis.md",
-    "summary": "移动端图形性能分析框架，覆盖 FPS、带宽、发热、CPU/GPU 归因、draw call、shader、overdraw 与 RT 带宽问题的系统化排查方法。",
-    "kind": "methodology",
-    "domain": "graphics",
-    "tags": ["performance", "mobile", "gpu-optimization", "bandwidth", "overdraw", "drawcall", "shader-analysis", "thermal-throttling"],
-    "triggers": ["性能", "performance", "带宽", "bandwidth", "发热", "耗电", "overdraw", "drawcall", "draw call", "帧率", "fps", "gpu slow", "gpu 慢", "热降频", "thermal", "移动端", "mobile"],
-    "scenarios": ["performance-analysis", "mobile-optimization"],
-    "modes": ["graphics"],
-    "priority": 95,
-    "relatedSkills": ["graphics-optimization"],
-    "relatedPlaybooks": ["gpu_slow"],
-    "tokenBudget": 1500,
-    "alwaysInclude": false
-  },
-  {
-    "id": "mode-handoff-validation-pattern",
-    "title": "Mode Handoff 验收回路模式",
-    "path": "general/mode-handoff-validation-pattern.md",
-    "summary": "Architect → Code 执行 → 回切 Architect 验收的完整回路模式，覆盖验收标准生成、执行报告、自动回切与修复循环。",
-    "kind": "methodology",
-    "domain": "general",
-    "tags": ["mode-handoff", "validation", "acceptance-criteria", "execution-report", "quality-assurance"],
-    "triggers": ["验收", "validation", "acceptance", "执行报告", "execution report", "回切", "auto return", "修复循环", "repair cycle"],
-    "scenarios": ["mode-handoff", "validation"],
-    "modes": ["architect", "code"],
-    "priority": 80,
-    "relatedSkills": [],
-    "relatedPlaybooks": [],
-    "tokenBudget": 1000,
-    "alwaysInclude": false
-  },
-  {
-    "id": "thegibook-foundations",
-    "title": "全局光照基础理论：导航页",
-    "path": "graphics/thegibook-foundations.md",
-    "summary": "全局光照原书前三章的导航索引，包含知识地图、判断清单和章节衔接关系。",
-    "kind": "reference",
-    "domain": "graphics",
-    "tags": ["global-illumination", "navigation", "overview"],
-    "triggers": ["全局光照", "GI", "thegibook", "基础理论"],
-    "scenarios": ["graphics-learning", "global-illumination"],
-    "modes": ["graphics", "code", "ask"],
-    "priority": 85,
-    "relatedSkills": ["rendering-pipeline", "graphics-optimization", "unity-graphics"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 800,
-    "alwaysInclude": false
-  },
-  {
-    "id": "thegibook-light-surface",
-    "title": "光与表面的交互",
-    "path": "graphics/thegibook-light-surface.md",
-    "summary": "全局光照基础理论：光学现象（阴影、AO、反射、间接漫反射、焦散、散射）、辐射度量学、渲染方程、BRDF 和 GI 算法选择依据。",
-    "kind": "reference",
-    "domain": "graphics",
-    "tags": ["global-illumination", "radiometry", "brdf", "rendering-equation", "shadow", "ao", "reflection", "color-bleeding", "caustics", "subsurface-scattering"],
-    "triggers": ["全局光照", "GI", "渲染方程", "BRDF", "辐射度量学", "阴影", "环境遮挡", "AO", "反射", "颜色渗透", "焦散", "次表面散射", "参与介质", "光照贴图", "光照探针"],
-    "scenarios": ["graphics-learning", "global-illumination", "rendering-design", "lighting-debug"],
-    "modes": ["graphics", "code", "ask"],
-    "priority": 92,
-    "relatedSkills": ["rendering-pipeline", "graphics-optimization", "unity-graphics"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 2400,
-    "alwaysInclude": false
-  },
-  {
-    "id": "thegibook-parallel-architecture",
-    "title": "并行处理器架构",
-    "path": "graphics/thegibook-parallel-architecture.md",
-    "summary": "CPU/GPU 分工、SIMD/SIMT 执行模型、分支发散、内存层次、算力/带宽/延迟瓶颈判断和渲染数据设计原则。",
-    "kind": "reference",
-    "domain": "graphics",
-    "tags": ["gpu", "cpu", "simd", "simt", "divergence", "bandwidth", "occupancy", "memory-hierarchy", "performance"],
-    "triggers": ["GPU", "CPU", "并行处理器", "SIMD", "SIMT", "分支发散", "带宽", "算力", "延迟", "占用率", "缓存", "内存层次", "GPU 性能", "GPU bound", "CPU bound"],
-    "scenarios": ["gpu-performance", "shader-optimization", "rendering-design"],
-    "modes": ["graphics", "code", "ask"],
-    "priority": 90,
-    "relatedSkills": ["graphics-optimization", "rendering-pipeline"],
-    "relatedPlaybooks": ["gpu_slow"],
-    "tokenBudget": 2000,
-    "alwaysInclude": false
-  },
-  {
-    "id": "thegibook-shading-pipeline",
-    "title": "着色管线",
-    "path": "graphics/thegibook-shading-pipeline.md",
-    "summary": "渲染管线流程、Forward/Deferred Shading、G-buffer 设计、Tiled/Clustered Shading、抗锯齿技术和 Shader 变体管理。",
-    "kind": "reference",
-    "domain": "graphics",
-    "tags": ["shading-pipeline", "forward-shading", "deferred-shading", "g-buffer", "tiled-shading", "clustered-shading", "anti-aliasing", "taa", "msaa", "shader-variant"],
-    "triggers": ["着色管线", "Forward", "Deferred", "G-buffer", "Tiled Shading", "Clustered Shading", "抗锯齿", "MSAA", "TAA", "FXAA", "Shader 变体", "渲染管线", "光源分配"],
-    "scenarios": ["pipeline-design", "rendering-design", "shader-optimization"],
-    "modes": ["graphics", "code", "ask"],
-    "priority": 91,
-    "relatedSkills": ["rendering-pipeline", "unity-graphics", "graphics-optimization"],
-    "relatedPlaybooks": [],
-    "tokenBudget": 2200,
-    "alwaysInclude": false
-  }
+[
+    {
+        "id":  "urp-shader-library",
+        "title":  "URP ShaderLibrary 工程知识库",
+        "path":  "graphics/urp-shader-library.md",
+        "summary":  "目标项目事实驱动的 URP ShaderLibrary 功能地图、事实门禁、稳定数据流与工作流入口。",
+        "kind":  "methodology",
+        "domain":  "graphics",
+        "tags":  [
+                     "unity",
+                     "urp",
+                     "shader-library",
+                     "shaderlab",
+                     "hlsl",
+                     "csharp-hlsl-contract"
+                 ],
+        "triggers":  [
+                         "URP Shader",
+                         "ShaderLibrary",
+                         "ShaderLab",
+                         "SurfaceData",
+                         "InputData",
+                         "BRDFData",
+                         "URP HLSL",
+                         "C#/HLSL"
+                     ],
+        "scenarios":  [
+                          "shader-authoring",
+                          "shader-review",
+                          "pipeline-shader-integration"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  101,
+        "relatedSkills":  [
+                              "write-shader",
+                              "rendering-pipeline",
+                              "unity-graphics"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  2200,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp-shader-library-architecture",
+        "title":  "URP ShaderLibrary 架构",
+        "path":  "graphics/urp-shader-library-architecture.md",
+        "summary":  "URP ShaderLibrary Include 分层、材质与管线数据流、资源生产消费及 Forward/Deferred 协议边界。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "unity",
+                     "urp",
+                     "include-graph",
+                     "surface-data",
+                     "brdf",
+                     "lighting",
+                     "forward",
+                     "deferred"
+                 ],
+        "triggers":  [
+                         "Include 分层",
+                         "URP 数据流",
+                         "SurfaceData",
+                         "BRDFData",
+                         "InputData",
+                         "Forward Deferred",
+                         "屏幕空间资源"
+                     ],
+        "scenarios":  [
+                          "shader-authoring",
+                          "shader-review",
+                          "pipeline-shader-integration"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  98,
+        "relatedSkills":  [
+                              "write-shader",
+                              "rendering-pipeline"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  2200,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp-shader-engineering",
+        "title":  "URP Shader 工程规范",
+        "path":  "graphics/urp-shader-engineering.md",
+        "summary":  "URP Shader 代码结构、SRP Batcher、初始化、坐标、光照阴影、多 Pass、Variant、精度与性能规范。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "unity",
+                     "urp",
+                     "shader-engineering",
+                     "srp-batcher",
+                     "shader-variant",
+                     "precision",
+                     "performance"
+                 ],
+        "triggers":  [
+                         "URP Shader 规范",
+                         "SRP Batcher",
+                         "Shader Variant",
+                         "DepthNormals",
+                         "ShadowCaster",
+                         "Meta Pass",
+                         "GBuffer"
+                     ],
+        "scenarios":  [
+                          "shader-authoring",
+                          "shader-review",
+                          "shader-optimization"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  99,
+        "relatedSkills":  [
+                              "write-shader",
+                              "graphics-optimization"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  3000,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp-shader-validation-checklist",
+        "title":  "URP Shader 验收清单",
+        "path":  "graphics/urp-shader-validation-checklist.md",
+        "summary":  "URP Shader 编译、绑定、多 Pass、Attachment、平台、画质、Variant 和性能验收门禁。",
+        "kind":  "playbook",
+        "domain":  "graphics",
+        "tags":  [
+                     "unity",
+                     "urp",
+                     "shader-validation",
+                     "checklist",
+                     "gbuffer",
+                     "xr",
+                     "variants",
+                     "performance"
+                 ],
+        "triggers":  [
+                         "Shader 验收",
+                         "URP Shader 检查",
+                         "Shader 编译",
+                         "GBuffer 协议",
+                         "XR Shader",
+                         "Variant 检查"
+                     ],
+        "scenarios":  [
+                          "shader-review",
+                          "shader-validation",
+                          "pipeline-shader-integration"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code"
+                  ],
+        "priority":  100,
+        "relatedSkills":  [
+                              "write-shader",
+                              "graphics-debug",
+                              "graphics-optimization"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  3200,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp12-scriptable-render-pass-reference",
+        "title":  "URP 12.1.7 ScriptableRenderPass 参考",
+        "path":  "graphics/urp12-scriptable-render-pass-reference.md",
+        "summary":  "基于 URP 12.1.7 包源码的 Execute-first ScriptableRenderPass 参考，覆盖传统注入链路、资源清理和 RenderGraph 降级规则。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "urp12",
+                     "unity-2021",
+                     "scriptable-render-pass",
+                     "execute",
+                     "command-buffer",
+                     "temporary-rt"
+                 ],
+        "triggers":  [
+                         "URP12",
+                         "URP 12.1.7",
+                         "Unity 2021.2",
+                         "ScriptableRenderPass",
+                         "传统 Pass",
+                         "OnCameraCleanup"
+                     ],
+        "scenarios":  [
+                          "unity-graphics",
+                          "pipeline-design",
+                          "version-migration"
+                      ],
+        "modes":  [
+                      "graphics"
+                  ],
+        "priority":  95,
+        "relatedSkills":  [
+                              "unity-graphics",
+                              "rendering-pipeline"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  1600,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp15-rendergraph-transition",
+        "title":  "URP 15.0.6 RenderGraph 过渡参考",
+        "path":  "graphics/urp15-rendergraph-transition.md",
+        "summary":  "基于 URP 15.0.6 包源码的通用 RenderGraph 过渡参考，记录 Execute、FrameResources 和版本边界，不包含项目敏感内容。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "urp15",
+                     "unity-2023",
+                     "rendergraph",
+                     "frameresources",
+                     "execute",
+                     "versioning"
+                 ],
+        "triggers":  [
+                         "URP15",
+                         "URP 15.0.6",
+                         "Unity 2023.1",
+                         "FrameResources",
+                         "RenderGraph 过渡"
+                     ],
+        "scenarios":  [
+                          "unity-graphics",
+                          "pipeline-design",
+                          "version-migration"
+                      ],
+        "modes":  [
+                      "graphics"
+                  ],
+        "priority":  96,
+        "relatedSkills":  [
+                              "unity-graphics",
+                              "rendering-pipeline"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  1600,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp-cross-version",
+        "title":  "跨版本 URP 图形工程方法",
+        "path":  "graphics/urp-cross-version.md",
+        "summary":  "以通用原则、版本适配和项目事实校验三层模型处理不同 Unity/URP 版本，包含 API 选择、兼容性信息和安全策略。",
+        "kind":  "methodology",
+        "domain":  "graphics",
+        "tags":  [
+                     "unity",
+                     "urp",
+                     "versioning",
+                     "rendergraph",
+                     "renderer-feature",
+                     "compatibility"
+                 ],
+        "triggers":  [
+                         "URP",
+                         "Unity",
+                         "版本",
+                         "跨版本",
+                         "RenderGraph",
+                         "RendererFeature",
+                         "ScriptableRenderPass",
+                         "兼容性"
+                     ],
+        "scenarios":  [
+                          "unity-graphics",
+                          "pipeline-design",
+                          "version-migration"
+                      ],
+        "modes":  [
+                      "graphics"
+                  ],
+        "priority":  100,
+        "relatedSkills":  [
+                              "unity-graphics",
+                              "rendering-pipeline"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  2200,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp-version-adaptation",
+        "title":  "URP 版本适配矩阵",
+        "path":  "graphics/urp-version-adaptation.md",
+        "summary":  "对比 URP 7-10、12、14、15-16 和 17+ 的 API 使用策略，并提供 RenderGraph、资源和迁移风险判断规则。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "urp",
+                     "version-matrix",
+                     "execute",
+                     "record-render-graph",
+                     "migration"
+                 ],
+        "triggers":  [
+                         "URP 版本",
+                         "URP12",
+                         "URP14",
+                         "URP17",
+                         "Execute",
+                         "RecordRenderGraph",
+                         "迁移"
+                     ],
+        "scenarios":  [
+                          "version-migration",
+                          "pipeline-design"
+                      ],
+        "modes":  [
+                      "graphics"
+                  ],
+        "priority":  98,
+        "relatedSkills":  [
+                              "unity-graphics",
+                              "rendering-pipeline"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  1800,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "urp-project-detection",
+        "title":  "URP 项目检测与降级规则",
+        "path":  "graphics/urp-project-detection.md",
+        "summary":  "从 Unity 项目文件、包版本、Renderer Data 和现有 Pass 代码识别实际 URP 环境，并在证据不足时安全降级。",
+        "kind":  "playbook",
+        "domain":  "graphics",
+        "tags":  [
+                     "unity",
+                     "urp",
+                     "detection",
+                     "diagnosis",
+                     "fallback",
+                     "renderer-data"
+                 ],
+        "triggers":  [
+                         "检测 URP",
+                         "项目版本",
+                         "Renderer Data",
+                         "Feature 不生效",
+                         "版本未知",
+                         "降级"
+                     ],
+        "scenarios":  [
+                          "unity-graphics",
+                          "pipeline-debug",
+                          "version-migration"
+                      ],
+        "modes":  [
+                      "graphics"
+                  ],
+        "priority":  99,
+        "relatedSkills":  [
+                              "unity-graphics",
+                              "rendering-pipeline",
+                              "graphics-debug"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  1800,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "shadow-dpcf-pcss-stability",
+        "title":  "DPCF 与 PCSS 阴影稳定性案例",
+        "path":  "graphics/shadow-dpcf-pcss-stability.md",
+        "summary":  "DPCF 与 PCSS 软阴影稳定性分析，覆盖 blocker search 硬阈值跳变、adaptive bias 联动、sample 级分支平滑化等根因与修复思路。",
+        "kind":  "case-study",
+        "domain":  "graphics",
+        "tags":  [
+                     "shadow",
+                     "dpcf",
+                     "pcss",
+                     "artifact",
+                     "soft-shadow",
+                     "blocker-search",
+                     "stability"
+                 ],
+        "triggers":  [
+                         "阴影",
+                         "shadow",
+                         "pcss",
+                         "dpcf",
+                         "softness",
+                         "漏光",
+                         "杂点",
+                         "跳变",
+                         "blocker",
+                         "半影",
+                         "penumbra",
+                         "shadow artifact",
+                         "shadow acne",
+                         "peter panning"
+                     ],
+        "scenarios":  [
+                          "artifact-analysis",
+                          "shadow-debug"
+                      ],
+        "modes":  [
+                      "graphics"
+                  ],
+        "priority":  90,
+        "relatedSkills":  [
+                              "graphics-debug"
+                          ],
+        "relatedPlaybooks":  [
+                                 "shadow_issue"
+                             ],
+        "tokenBudget":  1500,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "mobile-performance-analysis",
+        "title":  "移动端图形性能分析方法论",
+        "path":  "graphics/mobile-performance-analysis.md",
+        "summary":  "移动端图形性能分析框架，覆盖 FPS、带宽、发热、CPU/GPU 归因、draw call、shader、overdraw 与 RT 带宽问题的系统化排查方法。",
+        "kind":  "methodology",
+        "domain":  "graphics",
+        "tags":  [
+                     "performance",
+                     "mobile",
+                     "gpu-optimization",
+                     "bandwidth",
+                     "overdraw",
+                     "drawcall",
+                     "shader-analysis",
+                     "thermal-throttling"
+                 ],
+        "triggers":  [
+                         "性能",
+                         "performance",
+                         "带宽",
+                         "bandwidth",
+                         "发热",
+                         "耗电",
+                         "overdraw",
+                         "drawcall",
+                         "draw call",
+                         "帧率",
+                         "fps",
+                         "gpu slow",
+                         "gpu 慢",
+                         "热降频",
+                         "thermal",
+                         "移动端",
+                         "mobile"
+                     ],
+        "scenarios":  [
+                          "performance-analysis",
+                          "mobile-optimization"
+                      ],
+        "modes":  [
+                      "graphics"
+                  ],
+        "priority":  95,
+        "relatedSkills":  [
+                              "graphics-optimization"
+                          ],
+        "relatedPlaybooks":  [
+                                 "gpu_slow"
+                             ],
+        "tokenBudget":  1500,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "mode-handoff-validation-pattern",
+        "title":  "Mode Handoff 验收回路模式",
+        "path":  "general/mode-handoff-validation-pattern.md",
+        "summary":  "Architect → Code 执行 → 回切 Architect 验收的完整回路模式，覆盖验收标准生成、执行报告、自动回切与修复循环。",
+        "kind":  "methodology",
+        "domain":  "general",
+        "tags":  [
+                     "mode-handoff",
+                     "validation",
+                     "acceptance-criteria",
+                     "execution-report",
+                     "quality-assurance"
+                 ],
+        "triggers":  [
+                         "验收",
+                         "validation",
+                         "acceptance",
+                         "执行报告",
+                         "execution report",
+                         "回切",
+                         "auto return",
+                         "修复循环",
+                         "repair cycle"
+                     ],
+        "scenarios":  [
+                          "mode-handoff",
+                          "validation"
+                      ],
+        "modes":  [
+                      "architect",
+                      "code"
+                  ],
+        "priority":  80,
+        "relatedSkills":  [
+
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  1000,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "thegibook-foundations",
+        "title":  "全局光照基础理论：导航页",
+        "path":  "graphics/thegibook-foundations.md",
+        "summary":  "全局光照原书前三章的导航索引，包含知识地图、判断清单和章节衔接关系。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "global-illumination",
+                     "navigation",
+                     "overview"
+                 ],
+        "triggers":  [
+                         "全局光照",
+                         "GI",
+                         "thegibook",
+                         "基础理论"
+                     ],
+        "scenarios":  [
+                          "graphics-learning",
+                          "global-illumination"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  85,
+        "relatedSkills":  [
+                              "rendering-pipeline",
+                              "graphics-optimization",
+                              "unity-graphics"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  800,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "thegibook-light-surface",
+        "title":  "光与表面的交互",
+        "path":  "graphics/thegibook-light-surface.md",
+        "summary":  "全局光照基础理论：光学现象（阴影、AO、反射、间接漫反射、焦散、散射）、辐射度量学、渲染方程、BRDF 和 GI 算法选择依据。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "global-illumination",
+                     "radiometry",
+                     "brdf",
+                     "rendering-equation",
+                     "shadow",
+                     "ao",
+                     "reflection",
+                     "color-bleeding",
+                     "caustics",
+                     "subsurface-scattering"
+                 ],
+        "triggers":  [
+                         "全局光照",
+                         "GI",
+                         "渲染方程",
+                         "BRDF",
+                         "辐射度量学",
+                         "阴影",
+                         "环境遮挡",
+                         "AO",
+                         "反射",
+                         "颜色渗透",
+                         "焦散",
+                         "次表面散射",
+                         "参与介质",
+                         "光照贴图",
+                         "光照探针"
+                     ],
+        "scenarios":  [
+                          "graphics-learning",
+                          "global-illumination",
+                          "rendering-design",
+                          "lighting-debug"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  92,
+        "relatedSkills":  [
+                              "rendering-pipeline",
+                              "graphics-optimization",
+                              "unity-graphics"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  2400,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "thegibook-parallel-architecture",
+        "title":  "并行处理器架构",
+        "path":  "graphics/thegibook-parallel-architecture.md",
+        "summary":  "CPU/GPU 分工、SIMD/SIMT 执行模型、分支发散、内存层次、算力/带宽/延迟瓶颈判断和渲染数据设计原则。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "gpu",
+                     "cpu",
+                     "simd",
+                     "simt",
+                     "divergence",
+                     "bandwidth",
+                     "occupancy",
+                     "memory-hierarchy",
+                     "performance"
+                 ],
+        "triggers":  [
+                         "GPU",
+                         "CPU",
+                         "并行处理器",
+                         "SIMD",
+                         "SIMT",
+                         "分支发散",
+                         "带宽",
+                         "算力",
+                         "延迟",
+                         "占用率",
+                         "缓存",
+                         "内存层次",
+                         "GPU 性能",
+                         "GPU bound",
+                         "CPU bound"
+                     ],
+        "scenarios":  [
+                          "gpu-performance",
+                          "shader-optimization",
+                          "rendering-design"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  90,
+        "relatedSkills":  [
+                              "graphics-optimization",
+                              "rendering-pipeline"
+                          ],
+        "relatedPlaybooks":  [
+                                 "gpu_slow"
+                             ],
+        "tokenBudget":  2000,
+        "alwaysInclude":  false
+    },
+    {
+        "id":  "thegibook-shading-pipeline",
+        "title":  "着色管线",
+        "path":  "graphics/thegibook-shading-pipeline.md",
+        "summary":  "渲染管线流程、Forward/Deferred Shading、G-buffer 设计、Tiled/Clustered Shading、抗锯齿技术和 Shader 变体管理。",
+        "kind":  "reference",
+        "domain":  "graphics",
+        "tags":  [
+                     "shading-pipeline",
+                     "forward-shading",
+                     "deferred-shading",
+                     "g-buffer",
+                     "tiled-shading",
+                     "clustered-shading",
+                     "anti-aliasing",
+                     "taa",
+                     "msaa",
+                     "shader-variant"
+                 ],
+        "triggers":  [
+                         "着色管线",
+                         "Forward",
+                         "Deferred",
+                         "G-buffer",
+                         "Tiled Shading",
+                         "Clustered Shading",
+                         "抗锯齿",
+                         "MSAA",
+                         "TAA",
+                         "FXAA",
+                         "Shader 变体",
+                         "渲染管线",
+                         "光源分配"
+                     ],
+        "scenarios":  [
+                          "pipeline-design",
+                          "rendering-design",
+                          "shader-optimization"
+                      ],
+        "modes":  [
+                      "graphics",
+                      "code",
+                      "ask"
+                  ],
+        "priority":  91,
+        "relatedSkills":  [
+                              "rendering-pipeline",
+                              "unity-graphics",
+                              "graphics-optimization"
+                          ],
+        "relatedPlaybooks":  [
+
+                             ],
+        "tokenBudget":  2200,
+        "alwaysInclude":  false
+    }
 ]

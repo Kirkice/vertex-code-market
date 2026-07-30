@@ -1,6 +1,6 @@
-﻿﻿---
+---
 name: write-shader
-description: "编写、修改和优化 GPU Shader 代码。用于从零实现 shader、修复 shader 编译或运行逻辑、重写热点采样/数学路径，或为 PBR、后处理、compute、天空盒、粒子等效果提供具体 shader 实现。支持 HLSL、GLSL、WGSL、MSL；如果主要任务是改 render pass 或管线架构，改用 rendering-pipeline。"
+description: "编写、修改、迁移、审查和优化 GPU Shader。支持通用 HLSL、GLSL、WGSL、MSL，以及 Unity URP ShaderLab、ShaderLibrary、材质/光照/阴影/GI、屏幕空间资源、GBuffer 和 C#/HLSL 协议。检测到 URP 时自动加载项目事实驱动的 URP 专用工作流；如果主要任务是改 render pass 或管线架构，改用 rendering-pipeline。"
 modeSlugs:
   - graphics
 ---
@@ -11,15 +11,98 @@ modeSlugs:
 
 优先检查工作区中已有的 shader、材质系统、绑定布局和命名约定；只有当本地代码不足以确定接口和约束时，再向用户补充提问。
 
+## 工作流路由
+
+首先识别渲染栈，再选择且只选择一个主分支：
+
+- **URP 分支**：存在 Unity URP 包、URP ShaderLab Tags/Pass、URP ShaderLibrary Include、Universal Renderer 资源，或任务明确要求 URP。执行本文“URP 专用工作流”，并渐进加载 URP 知识库。
+- **通用分支**：非 URP 的 HLSL、GLSL、WGSL、MSL、自研引擎、其他渲染管线或纯 Shader 数学任务。执行原有通用工作流。
+- **未确认**：先从项目清单、Shader Include、材质和 Renderer 配置判断。不得因使用 HLSL 或 Unity 就默认是 URP。
+
+URP 分支是 `write-shader` 的内部专用路径，不再切换到独立 URP Shader Skill。
+
 ## Skill 切换
 
 - 如果主要任务是改 render graph、插入新 pass、调整资源生命周期或同步策略，切换到 `rendering-pipeline`
 - 如果主要问题是黑屏、花屏、阴影错误、颜色错误等结果不对，先切换到 `graphics-debug`
 - 如果主要诉求是帧率、带宽、draw call 或整条 pass 链路的优化，切换到 `graphics-optimization`
-- 如果任务发生在 Unity 的 ShaderLab/URP/HDRP 语境里，先过一遍 `unity-graphics` 确认落在哪个 Unity 接口层
+- 如果任务发生在 Unity 中，先用 `unity-graphics` 确认 Built-in、URP 或 HDRP；确认为 URP 后留在本 Skill 并进入 URP 分支
 - 如果确认瓶颈就在某个 shader 热点路径，再回到本 skill 完成具体实现
 
-## 工作流程
+## URP 专用工作流
+
+### 1. 渐进加载知识
+
+确认任务属于 URP 后，必须先读 [`../../../knowledge/graphics/urp-shader-library.md`](../../../knowledge/graphics/urp-shader-library.md)，再按任务加载：
+
+| 需要 | 文档 |
+|---|---|
+| Include 分层、数据流、Forward/Deferred 与资源边界 | [`../../../knowledge/graphics/urp-shader-library-architecture.md`](../../../knowledge/graphics/urp-shader-library-architecture.md) |
+| 代码结构、SRP Batcher、多 Pass、Variant、精度和性能 | [`../../../knowledge/graphics/urp-shader-engineering.md`](../../../knowledge/graphics/urp-shader-engineering.md) |
+| 实现、迁移、审查或完成判定 | [`../../../knowledge/graphics/urp-shader-validation-checklist.md`](../../../knowledge/graphics/urp-shader-validation-checklist.md) |
+| Renderer 调度、资源生产或管线侧定制 | [`../../../knowledge/graphics/urp-cross-version.md`](../../../knowledge/graphics/urp-cross-version.md)，并切换或协作 `rendering-pipeline` |
+
+不要默认加载全部文档，也不要把某个目标项目的符号提升为通用事实。
+
+### 2. 强制 Shader 事实卡
+
+生成绑定 URP 协议的代码前，必须确认并报告：
+
+```text
+渲染管线：URP / 未确认
+目标 Shader 与 Pass：
+Renderer 与 Rendering Mode：
+目标平台与 Shader Target：
+入口 Include：
+本地可用结构体、宏和函数签名：
+纹理、Sampler、Buffer 与 CBUFFER：
+Keyword 与 Variant 来源：
+C# Property、Keyword、Buffer、Attachment 或 GBuffer 对端：
+XR / 动态分辨率 / MSAA / HDR / 屏幕方向相关性：
+证据：
+未知项与假设：
+```
+
+关键 Include、符号、布局、资源生产者或 C# 对端未确认时：
+
+- 不生成绑定未确认协议的完整 Shader。
+- 不从其他项目复制路径、签名、宏或布局并当作本地事实。
+- 不重复声明管线全局变量或结构体来压制编译错误。
+- 查找目标项目同一 Pass、材质模型和 Renderer 的最近可工作实现。
+- 将关键未知项标为 BLOCKED，不得猜测。
+
+### 3. Detect → Classify → Trace → Design
+
+1. **Detect**：确认 Shader、SubShader、Pass、材质模型、Renderer、Rendering Mode、包源码、图形 API 和平台。
+2. **Classify**：判断属于 Surface/Input、BRDF、实时光、阴影/GI、屏幕输入、Forward/GBuffer/DBuffer、辅助 Pass、实例化、Variant 或性能。
+3. **Trace**：沿 Include、Material→Surface→BRDF→Lighting→Output 以及 Renderer/C#→资源/Keyword/Buffer→HLSL 两条链路溯源。
+4. **Design**：定义最小 Include、CBUFFER、Attributes/Varyings、坐标空间、多 Pass 矩阵、C#/HLSL 协议、Keyword、精度、兼容范围和性能预算。
+
+纹理声明不能证明 Renderer 会生产资源，Pass 名称也不能证明实际执行时机。
+
+### 4. URP 实现规则
+
+- 只使用目标项目源码证明存在的符号和签名。
+- Include 最小、显式并遵循 Core/Input → Surface/BRDF → Lighting/Pass 方向。
+- 所有材质 Pass 保持相同 Material CBUFFER 布局。
+- 完整初始化 Surface、Input、BRDF 和输出结构。
+- 使用管线 Transform、Screen UV、Depth、Texture、Stereo 和 Light Loop 抽象。
+- 同步 C# 与 HLSL 的 Property、Keyword、Buffer、Attachment、格式和 Packing。
+- Alpha Clip、Vertex Deformation、Normal 和材质语义必须覆盖适用的 Forward、GBuffer、DepthNormals、ShadowCaster、Meta、Motion 和 Debug Pass。
+- Keyword 必须有设置端、作用域、剔除策略和 Variant 预算。
+- 精度按数值范围和稳定性选择，不统一降为 `half`。
+- Deprecated Include 只用于迁移，不作为新代码入口。
+- 长期定制不得落在带哈希的 Package Cache；使用项目 Include 或 Local/Embedded 包。
+
+涉及屏幕资源时，先确认 Renderer 生产和绑定；涉及 GBuffer/DBuffer 时，把 C# Attachment、Target、格式、Pack/Unpack、Reader、Debug 和回退作为同一协议修改。
+
+### 5. URP 验收与报告
+
+执行 [`../../../knowledge/graphics/urp-shader-validation-checklist.md`](../../../knowledge/graphics/urp-shader-validation-checklist.md) 的适用项。状态只允许 PASS、FAIL、N/A、BLOCKED、REVIEW：未执行项不得记为 PASS，FAIL 阻止完成。
+
+最终报告必须包含：事实卡与源码证据、修改文件、Include/数据流、C#/HLSL 协议、多 Pass 覆盖、Variant、精度和资源成本、验证配置与状态、未支持范围及剩余风险。
+
+## 通用工作流程
 
 ### Step 1: 需求收集
 
